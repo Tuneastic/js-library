@@ -62,6 +62,7 @@ document.getElementById('addBook').addEventListener('click', function() {
             const cellAuthor = document.createElement('td');
             const cellButton = document.createElement('button');
             cellButton.innerText = "Delete";
+            
             cellButton.addEventListener('click', function () {
                 const rowIndex = Array.from(tableCard.rows).indexOf(newRow);
                 myLibrary.splice(rowIndex, 1);
