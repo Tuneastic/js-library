@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+//functions to create the books
 
     const myLibrary = [];
 
@@ -14,40 +15,40 @@ document.addEventListener('DOMContentLoaded', function() {
         myLibrary.push(newBook);
         return myLibrary;
     }
-
-    // addBookToLibrary("The Hobbit", "Tolkien");
-    // addBookToLibrary("The Hunger Games", "Suzanne Collins");
-    // addBookToLibrary("The Lord Of The Rings", "Tolkien");
-    // addBookToLibrary("Twilight", "Stephenie Meyer");
-
-    // console.log(myLibrary);
+// when add book button is pushed
 
 document.getElementById('addBook').addEventListener('click', function() {
     const forms = document.getElementById('forms');
     forms.innerHTML = '';
 
+    //create title input
     const titleInput = document.createElement('input');
     titleInput.type = 'text';
     titleInput.placeholder = 'Book Title';
     forms.appendChild(titleInput);
 
+    //create author input
     const authorInput = document.createElement('input');
     authorInput.type = 'text';
     authorInput.placeholder = 'Author Name';
     forms.appendChild(authorInput);
 
+    //create the submit button
     const submitButton = document.createElement('input');
     submitButton.type = 'submit';
     submitButton.value = 'Submit';
     submitButton.id = 'submitBook';
     forms.appendChild(submitButton);
     
+    //what happend when submit is clicked
     submitButton.addEventListener('click', function() {
+        //empty the container to initiate
         document.getElementById('container').innerHTML = "";
         
+        //get information from the inputs and put them into the function to create a book
+        //and add it to the library array
         const title = titleInput.value;
         const author = authorInput.value;
-        
         addBookToLibrary(title, author);
 
         const numberOfRows = myLibrary.length;
@@ -55,22 +56,33 @@ document.getElementById('addBook').addEventListener('click', function() {
         const tableCard = document.createElement('table');
         cardContainer.appendChild(tableCard);
 
+        //iterate over the length of the library array
+        //add this number of rows into the table
+        //fill the cells of the rows with the data from the library array
+        //create a delete button for each row of the table
         for (let i = 0; i < numberOfRows; i++){
             
+            //create the different elements of the table
             const newRow = document.createElement('tr');
             const cellTitle = document.createElement('td');
             const cellAuthor = document.createElement('td');
             const cellButton = document.createElement('button');
             cellButton.innerText = "Delete";
             
+            const cellButtonRead = document.createElement('button');
+            
+
+            //add functionality to the delete button to ensure it deletes the corresponding row
+            //and adjusts the library array
             cellButton.addEventListener('click', function () {
                 const rowIndex = Array.from(tableCard.rows).indexOf(newRow);
                 myLibrary.splice(rowIndex, 1);
                 tableCard.removeChild(newRow);
             })
-
+            //fill the cells with the information from the library array
             cellTitle.textContent = myLibrary[i].title;
             cellAuthor.textContent = myLibrary[i].author;
+            newRow.appendChild(cellButtonRead);
             newRow.appendChild(cellTitle);
             newRow.appendChild(cellAuthor);
             newRow.appendChild(cellButton);
@@ -78,6 +90,8 @@ document.getElementById('addBook').addEventListener('click', function() {
             newRow.value = myLibrary[i];
             
         }
+        //remove the created forms after the submit button is pushed
+        //for a clean slate
         forms.innerHTML = "";
     })
 });
