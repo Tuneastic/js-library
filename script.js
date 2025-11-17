@@ -1,17 +1,75 @@
-const myLibrary = [];
+document.addEventListener('DOMContentLoaded', function() {
 
-function Book(title, author, pages) {
-    this.id = crypto.randomUUID();
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-}
+    const myLibrary = [];
 
-function addBookToLibrary(title, author, pages) {
+    function Book(title, author) {
+        this.id = crypto.randomUUID();
+        this.title = title;
+        this.author = author;
+    }
 
-    const newBook = new Book (title, author, pages);
-    myLibrary.push(newBook);
-    return myLibrary;
-}
+    function addBookToLibrary(title, author) {
 
-console.log(addBookToLibrary("The Hobbit", "Tolkien", 295));
+        const newBook = new Book (title, author);
+        myLibrary.push(newBook);
+        return myLibrary;
+    }
+
+    // addBookToLibrary("The Hobbit", "Tolkien");
+    // addBookToLibrary("The Hunger Games", "Suzanne Collins");
+    // addBookToLibrary("The Lord Of The Rings", "Tolkien");
+    // addBookToLibrary("Twilight", "Stephenie Meyer");
+
+    // console.log(myLibrary);
+
+document.getElementById('addBook').addEventListener('click', function() {
+    const forms = document.getElementById('forms');
+    forms.innerHTML = '';
+
+    const titleInput = document.createElement('input');
+    titleInput.type = 'text';
+    titleInput.placeholder = 'Book Title';
+    forms.appendChild(titleInput);
+
+    const authorInput = document.createElement('input');
+    authorInput.type = 'text';
+    authorInput.placeholder = 'Author Name';
+    forms.appendChild(authorInput);
+
+    const submitButton = document.createElement('input');
+    submitButton.type = 'submit';
+    submitButton.value = 'Submit';
+    submitButton.id = 'submitBook';
+    forms.appendChild(submitButton);
+    
+    submitButton.addEventListener('click', function() {
+        document.getElementById('container').innerHTML = "";
+        
+        const title = titleInput.value;
+        const author = authorInput.value;
+        
+        addBookToLibrary(title, author);
+
+        const numberOfRows = myLibrary.length;
+        const cardContainer = document.getElementById('container');
+        const tableCard = document.createElement('table');
+        cardContainer.appendChild(tableCard);
+
+        for (let i = 0; i < numberOfRows; i++){
+            
+            const newRow = document.createElement('tr');
+            const cellTitle = document.createElement('td');
+            const cellAuthor = document.createElement('td');
+            cellTitle.textContent = myLibrary[i].title;
+            cellAuthor.textContent = myLibrary[i].author;
+            newRow.appendChild(cellTitle);
+            newRow.appendChild(cellAuthor);
+            tableCard.appendChild(newRow);
+            newRow.value = myLibrary[i];
+            
+        }
+        forms.innerHTML = "";
+    })
+});
+
+});
