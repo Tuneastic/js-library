@@ -60,10 +60,19 @@ document.getElementById('addBook').addEventListener('click', function() {
             const newRow = document.createElement('tr');
             const cellTitle = document.createElement('td');
             const cellAuthor = document.createElement('td');
+            const cellButton = document.createElement('button');
+            cellButton.innerText = "Delete";
+            cellButton.addEventListener('click', function () {
+                const rowIndex = Array.from(tableCard.rows).indexOf(newRow);
+                myLibrary.splice(rowIndex, 1);
+                tableCard.removeChild(newRow);
+            })
+
             cellTitle.textContent = myLibrary[i].title;
             cellAuthor.textContent = myLibrary[i].author;
             newRow.appendChild(cellTitle);
             newRow.appendChild(cellAuthor);
+            newRow.appendChild(cellButton);
             tableCard.appendChild(newRow);
             newRow.value = myLibrary[i];
             
