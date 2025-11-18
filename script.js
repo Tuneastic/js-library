@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    //functions to create the books
+
     const myLibrary = [];
 
     function Book(title, author) {
@@ -16,11 +16,13 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     function addBookToLibrary(title, author) {
-
+        //create a new book object
         const newBook = new Book (title, author);
+        //store the created book object in the library array
         myLibrary.push(newBook);
         return myLibrary;
     }
+
     //what happens when add book button is clicked
     document.getElementById('addBook').addEventListener('click', function() {
         const forms = document.getElementById('forms');
@@ -73,15 +75,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 const cellAuthor = document.createElement('td');
                 const cellButton = document.createElement('button');
                 cellButton.innerText = "Delete";
+                
                 //create the read status button
                 const cellButtonRead = document.createElement('button');
                 cellButtonRead.textContent = myLibrary[i].readStatus ? "Mark as Unread" : "Mark as Read";
+                
                 //add functionality to the read status button
                 cellButtonRead.addEventListener('click', function() {
+                    
+                    //toggle read status when clicked
                     myLibrary[i].toggleReadStatus();
                     cellButtonRead.textContent = myLibrary[i].readStatus ? "Mark as Unread" : "Mark as Read";
+                    
+                    //change the style of the tr according to read status
                     newRow.style.backgroundColor = myLibrary[i].readStatus ? "blue" : "";
                 })
+                
                 //add functionality to the delete button to ensure it deletes the corresponding row
                 //and adjusts the library array
                 cellButton.addEventListener('click', function () {
@@ -89,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     myLibrary.splice(rowIndex, 1);
                     tableCard.removeChild(newRow);
                 })
+                
                 //fill the cells with the information from the library array
                 cellTitle.textContent = myLibrary[i].title;
                 cellAuthor.textContent = myLibrary[i].author;
@@ -100,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 newRow.value = myLibrary[i];
                 
             }
+            
             //remove the created inputs after the submit button is pushed
             //for a clean slate
             forms.innerHTML = "";
