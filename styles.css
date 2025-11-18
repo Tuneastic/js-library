@@ -37,21 +37,22 @@
 }
 
 #container > * {
-    width:25%;
+    width:40%;
 }
 
 tr {
     display:flex;
-    justify-content: space-evenly;
     align-items: center;
-    margin:5px;
+    justify-content: space-between;
+    margin:10px;
+    border-radius: 15px;
 }
 
 #container tr button:first-child {
     background-color: blue; 
     color: white;
     width:80px;
-    height:30px;
+    height:35px;
     border-radius: 15px;
 }
 
@@ -59,6 +60,6 @@ tr {
     background-color: red; 
     color: white;
     width:80px;
-    height:30px;
+    height:35px;
     border-radius: 15px;
 }
