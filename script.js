@@ -82,8 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     cellButtonRead.textContent = myLibrary[i].readStatus ? "Mark as Unread" : "Mark as Read";
                     newRow.style.backgroundColor = myLibrary[i].readStatus ? "blue" : "";
                 })
-                
-
                 //add functionality to the delete button to ensure it deletes the corresponding row
                 //and adjusts the library array
                 cellButton.addEventListener('click', function () {
